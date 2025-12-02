@@ -1,145 +1,286 @@
-  body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Segoe UI", sans-serif;
-    color: white;
+:root {
+  --primary-color: #4facfe;
+  --secondary-color: #00f2fe;
+  --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-color: #ffffff;
+  --text-muted: #a0a0a0;
+  --success-color: #00e676;
+  --error-color: #ff1744;
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.card {
+  width: 400px;
+  max-width: 90%;
+  padding: 40px;
+  border-radius: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  .card {
-    width: 380px;
-    max-width: 92%;
-    padding: 28px 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 10px 45px rgba(0,0,0,0.25);
-    text-align: center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+}
+
+.status-badge.online {
+  color: var(--success-color);
+  background: rgba(0, 230, 118, 0.1);
+  border: 1px solid rgba(0, 230, 118, 0.2);
+}
+
+.status-badge.online .status-dot {
+  background-color: var(--success-color);
+  box-shadow: 0 0 8px var(--success-color);
+}
+
+.status-badge.offline {
+  color: var(--error-color);
+  background: rgba(255, 23, 68, 0.1);
+  border: 1px solid rgba(255, 23, 68, 0.2);
+}
+
+.status-badge.offline .status-dot {
+  background-color: var(--error-color);
+}
+
+/* Auth Styles */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+}
+
+input:focus {
+  border-bottom-color: var(--primary-color);
+}
+
+label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+input:focus~label,
+input:not(:placeholder-shown)~label {
+  top: -10px;
+  transform: translateY(0);
+  font-size: 12px;
+  color: var(--primary-color);
+}
+
+/* Button Styles */
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+/* Control UI Styles */
+.control-container {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  h1 {
-    margin-bottom: 10px;
-    font-size: 26px;
-    font-weight: bold;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  .status-badge {
-    display: inline-block;
-    padding: 6px 15px;
-    border-radius: 50px;
-    font-size: 13px;
-    margin-bottom: 20px;
-  }
-  .online { background: #4caf50; }
-  .offline { background: #e53935; }
+.gpio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
 
-  /* Center input elements nicely */
-  #authBox {
-    width: 100%;
-    text-align: center;
-  }
+.gpio-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s;
+}
 
-  input {
-    width: 90%;
-    padding: 14px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    background: rgba(255,255,255,0.18);
-    color: white;
-    text-align: center;
-  }
+.gpio-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
 
-  /* Modern Global Button Style */
-  .btn {
-    width: 92%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 12px;
-    border: none;
-    font-size: 17px;
-    cursor: pointer;
-    color: white;
-    font-weight: 600;
+.gpio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-    background: linear-gradient(135deg, #03a9f4, #0277bd);
-    transition: 0.25s ease;
-    box-shadow: 0 6px 18px rgba(3, 169, 244, 0.35);
-    position: relative;
-    overflow: hidden;
-  }
+.gpio-name {
+  font-weight: 500;
+  font-size: 16px;
+}
 
-  /* Ripple effect */
-  .btn:active::after {
-    content: "";
-    position: absolute;
-    width: 180%;
-    height: 180%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.4);
-    border-radius: 50%;
-    animation: ripple 0.5s ease-out;
-  }
+.gpio-status-text {
+  font-size: 12px;
+  color: var(--text-muted);
+}
 
-  @keyframes ripple {
-    from { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
-    to   { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
-  }
+/* Toggle Switch */
+.gpio-toggle {
+  width: 50px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-  /* Logout Button Style */
-  .logout-btn {
-    background: linear-gradient(135deg, #e53935, #c62828);
-    box-shadow: 0 6px 18px rgba(229, 57, 53, 0.35);
-  }
+.toggle-handle {
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-  /* Modern GPIO Buttons */
-  .gpio-button {
-    width: 100%;
-    padding: 16px;
-    margin: 20px 0 5px 0;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #1f3b73, #274b8c);
-    border: none;
-    cursor: pointer;
-    font-size: 19px;
-    color: white;
-    transition: 0.25s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
-  }
+.gpio-toggle.on {
+  background: var(--success-color);
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
+}
 
-  .gpio-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(30,80,200,0.45);
-  }
+.gpio-toggle.on .toggle-handle {
+  transform: translateX(22px);
+}
 
-  .gpio-button.on {
-    background: linear-gradient(135deg, #00c853, #98ee99);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(0,255,120,0.45);
-  }
-
-  .gpio-status {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #cfcfcf;
-  }
-
-  #authMsg {
-    margin-top: 10px;
-    color: #ffb3b3;
-    font-size: 14px;
-  }
-  input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+#authMsg {
+  text-align: center;
+  font-size: 14px;
+  color: var(--error-color);
+  min-height: 20px;
 }
